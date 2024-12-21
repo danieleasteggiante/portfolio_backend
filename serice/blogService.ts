@@ -1,7 +1,6 @@
 import {IBlogPost} from "../models/BlogPost";
 import mongoose from 'mongoose';
 import {BlogPost} from "../models/BlogPost";
-import Blog from "../rest/blog";
 
 export function createNewBlogService(dto: IBlogPost) {
     const newBlog = new BlogPost({

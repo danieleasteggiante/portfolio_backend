@@ -9,7 +9,7 @@ router.get('/', (req : Express.Request, res: Express.Response) => {
 router.post('/article', async (req : Express.Request, res: Express.Response) => {
     try {
         const result = await createNewBlogService(req.body);
-        res.json(result);
+        res.json(result.id);
     } catch (e) {
         res.send(e);
     }

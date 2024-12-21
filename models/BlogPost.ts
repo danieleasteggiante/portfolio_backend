@@ -6,7 +6,7 @@ const BlogPostSchema =  new Schema({
     content: String,
     author: String,
     date: { type: Date, default: Date.now },
-});
+},{ collection: 'articles' });
 
 export interface IBlogPost {
     header: string,
