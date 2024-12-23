@@ -1,11 +1,12 @@
 
 import Express from 'express';
 const router = Express.Router();
-import {createNewBlogService, getBlogServiceById} from "../serice/blogService";
+import {createNewBlogService, getBlogByDateFromTo, getBlogServiceById} from "../service/blogService";
 
 router.get('/', (req : Express.Request, res: Express.Response) => {
     res.send('Blog Api');
 });
+
 router.post('/article', async (req : Express.Request, res: Express.Response) => {
     try {
         const result = await createNewBlogService(req.body);
@@ -14,9 +15,37 @@ router.post('/article', async (req : Express.Request, res: Express.Response) => 
         res.send(e);
     }
 });
+
 router.get('/article/:id', async (req : Express.Request, res: Express.Response) => {
     try {
         const result = await getBlogServiceById(req.params.id);
+        res.json(result);
+    } catch (e) {
+        res.send(e);
+    }
+});
+
+router.get('/article/:from/:to', async (req : Express.Request, res: Express.Response) => {
+    try {
+        const result = await getBlogByDateFromTo(new Date(req.params.from), new Date(req.params.to));
+        res.json(result);
+    } catch (e) {
+        res.send(e);
+    }
+});
+
+router.get('/article/:from', async (req : Express.Request, res: Express.Response) => {
+    try {
+        const result = await getBlogByDateFromTo(new Date(req.params.from), new Date());
+        res.json(result);
+    } catch (e) {
+        res.send(e);
+    }
+});
+
+router.get('/article/:to', async (req : Express.Request, res: Express.Response) => {
+    try {
+        const result = await getBlogByDateFromTo(new Date(0), new Date(req.params.to));
         res.json(result);
     } catch (e) {
         res.send(e);

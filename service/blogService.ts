@@ -16,3 +16,7 @@ export function createNewBlogService(dto: IBlogPost) {
 export function getBlogServiceById(id: string)  {
     return BlogPost.findById(id);
 }
+
+export function getBlogByDateFromTo(from : Date, to : Date){
+    return BlogPost.find({date: {$gte: from, $lte: to}});
+}
