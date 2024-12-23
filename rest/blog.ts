@@ -2,12 +2,13 @@
 import Express from 'express';
 const router = Express.Router();
 import {createNewBlogService, getBlogByDateFromTo, getBlogServiceById} from "../service/blogService";
+import {checkPassword} from "../middlewares/Auth";
 
 router.get('/', (req : Express.Request, res: Express.Response) => {
     res.send('Blog Api');
 });
 
-router.post('/article', async (req : Express.Request, res: Express.Response) => {
+router.post('/article', checkPassword, async (req : Express.Request, res: Express.Response) => {
     try {
         const result = await createNewBlogService(req.body);
         res.json(result.id);
