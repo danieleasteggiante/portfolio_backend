@@ -9,9 +9,9 @@ export async function DBconnection (debug: boolean) {
     }
     try {
         await mongoose.connect('mongodb://127.0.0.1:27017/' + process.env.DB_NAME);
+        console.log('Connection to DB is established');
     } catch (e) {
         console.log('Connection to DB failed ' + e);
         process.exit(1);
     }
-    console.log('Connection to DB is established');
 }

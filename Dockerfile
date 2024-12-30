@@ -1,3 +1,5 @@
-FROM mongo
-
-COPY init-mongo.js /docker-entrypoint-initdb.d/
+FROM node:alpine3.21
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY . .
