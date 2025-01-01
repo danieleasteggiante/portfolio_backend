@@ -1,7 +1,12 @@
 
 import Express from 'express';
 const router = Express.Router();
-import {createNewBlogService, getBlogByDateFromTo, getBlogServiceById} from "../service/blogService";
+import {
+    createNewBlogService,
+    getBlogByDateFromTo,
+    getBlogFromNumberToNumber,
+    getBlogServiceById
+} from "../service/blogService";
 import {checkPassword} from "../middlewares/Auth";
 
 router.get('/', (req : Express.Request, res: Express.Response) => {
@@ -28,6 +33,15 @@ router.get('/article/:id', async (req : Express.Request, res: Express.Response) 
 
 router.get('/article/:from/:to', async (req : Express.Request, res: Express.Response) => {
     try {
+        const result = await getBlogFromNumberToNumber(parseInt(req.params.from), parseInt(req.params.to));
+        res.json(result);
+    } catch (e) {
+        res.send(e);
+    }
+});
+
+router.get('/article/date/:from/:to', async (req : Express.Request, res: Express.Response) => {
+    try {
         const result = await getBlogByDateFromTo(new Date(req.params.from), new Date(req.params.to));
         res.json(result);
     } catch (e) {
@@ -35,7 +49,7 @@ router.get('/article/:from/:to', async (req : Express.Request, res: Express.Resp
     }
 });
 
-router.get('/article/:from', async (req : Express.Request, res: Express.Response) => {
+router.get('/article/date/:from', async (req : Express.Request, res: Express.Response) => {
     try {
         const result = await getBlogByDateFromTo(new Date(req.params.from), new Date());
         res.json(result);
@@ -44,7 +58,7 @@ router.get('/article/:from', async (req : Express.Request, res: Express.Response
     }
 });
 
-router.get('/article/:to', async (req : Express.Request, res: Express.Response) => {
+router.get('/article/date/:to', async (req : Express.Request, res: Express.Response) => {
     try {
         const result = await getBlogByDateFromTo(new Date(0), new Date(req.params.to));
         res.json(result);

@@ -9,15 +9,15 @@ function getValueFromHeader(req: Express.Request, key: string) {
     return req.headers[key];
 }
 
-export function checkPassword(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+export async function checkPassword(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
     const password = getValueFromHeader(req, 'x-api-password');
-    const validPassword = process.env.API_PASSWORD;
-    if (password && hashPassword(password) === hashPassword(validPassword!))
+    const validPassword = await hashPassword(process.env.API_PASSWORD!);
+    if (password && password === validPassword!)
         next();
     res.status(401).send('Unauthorized');
 }
 
-async function hashPassword(password: string) {
+export async function hashPassword(password: string) {
     if (!password)
         throw new Error('Password is not defined');
     const secret = process.env.SECRET_KEY;

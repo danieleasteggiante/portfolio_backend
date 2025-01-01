@@ -20,3 +20,7 @@ export function getBlogServiceById(id: string)  {
 export function getBlogByDateFromTo(from : Date, to : Date){
     return BlogPost.find({date: {$gte: from, $lte: to}});
 }
+
+export function getBlogFromNumberToNumber(from : number, to : number){
+    return BlogPost.find().sort({ date: -1 }).skip(from).limit(to - from);
+}
