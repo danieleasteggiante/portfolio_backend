@@ -12,8 +12,10 @@ function getValueFromHeader(req: Express.Request, key: string) {
 export async function checkPassword(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
     const password = getValueFromHeader(req, 'x-api-password');
     const validPassword = await hashPassword(process.env.API_PASSWORD!);
-    if (password && password === validPassword!)
+    if (password && password === validPassword) {
         next();
+        return;
+    }
     res.status(401).send('Unauthorized');
 }
 

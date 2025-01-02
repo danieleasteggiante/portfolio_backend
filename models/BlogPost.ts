@@ -9,6 +9,7 @@ const BlogPostSchema =  new Schema({
 },{ collection: 'articles' });
 
 export interface IBlogPost {
+    id: string,
     header: string,
     category: string,
     content: string,
