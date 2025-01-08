@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import blogController from './rest/blogController';
 import loginController from './rest/loginController';
+import cvController from './rest/cvController';
 import {LOGGER} from "./middlewares/Logger";
 import { DBconnection} from "./configuration/DBconnection";
 import cors from "cors";
@@ -20,4 +21,5 @@ app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
     debugMode && console.log(`[server]: Server runs in debug mode.`);
 });
+app.use("/api/cv", cvController)
 
