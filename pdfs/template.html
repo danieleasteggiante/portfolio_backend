@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Curriculum Vitae</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: whitesmoke;
+            background-color: black;
+        }
+
+        h3 {
+            color: whitesmoke;
+        }
+
+        h1, h2 {
+            padding: 10px;
+            background-color: yellow;
+            color: black;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        section {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            padding-left: 10px;
+            border-left: whitesmoke solid 1px
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>_curriculum vitae</h1>
+    <img src="data:image/png;base64,{{image}}" alt="photo"
+         style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px;">
+    <h2>_personal information</h2>
+    <p>_name: {{this.cv.name}}</p>
+    <p>_job: {{this.cv.job}}</p>
+    <p>_location: {{this.cv.location}}</p>
+
+    <h3>_technical skills</h3>
+    <ul>
+        {{#each this.cv.technicalSkills}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+
+    <h2>_job experience</h2>
+    {{#each this.cv.jobExperience}}
+    <section>
+        <div>
+            <h3>{{this.role}}</h3>
+            <p><strong>{{this.company}}</strong></p>
+            <p><em>{{this.date}}</em></p>
+            <p>{{this.description}}</p>
+            <ul>
+                {{#each this.skills}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </section>
+    {{/each}}
+
+    <h2>_education</h2>
+    {{#each this.cv.education}}
+    <section>
+        <div>
+            <h3>{{this.institution}}</h3>
+            <p><strong>{{this.vote}}</strong></p>
+            <p><em>{{this.degree}}</em></p>
+            <p>{{this.description}}</p>
+            <h4>Main subjects:</h4>
+            <ul>
+                {{#each this.subjects}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </section>
+    {{/each}}
+    <h2>_languages</h2>
+    <section>
+        <ul>
+            {{#each this.cv.languages}}
+            <li>{{this.language}} - {{this.level}}</li>
+            {{/each}}
+
+        </ul>
+    </section>
+    <h2>_certifications</h2>
+    <section>
+        <ul>
+            {{#each this.cv.certifications}}
+            <li>{{this.name}} - {{this.date}} - {{this.link}}</li>
+            {{/each}}
+        </ul>
+    </section>
+</div>
+</body>
+</html>
