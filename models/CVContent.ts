@@ -5,6 +5,7 @@ export const cvObject = {
     job: 'Full Stack Developer',
     location: 'Bologna, Italy',
     profileImage: path.join(__dirname, '../pdfs/profile.png'),
+    website: 'https://generativedan.com',
     technicalSkills: [
         'Java · Java EE · Spring Boot · Hibernate · Jax-Rs · Jax-Ws · JMS · EJB',
         'Python · Django · FastApi',

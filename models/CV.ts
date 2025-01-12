@@ -3,6 +3,7 @@ interface ICV {
     job: string,
     location: string,
     profileImage: string,
+    website: string,
     technicalSkills: string[],
     jobExperience: IJobExperience[],
     education: IEducation[],
