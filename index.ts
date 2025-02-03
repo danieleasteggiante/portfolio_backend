@@ -9,6 +9,7 @@ import cors from "cors";
 import {createServer} from "node:http";
 import {Server} from "socket.io";
 import {chatHandler, socketConfig} from "./configuration/socketConfig";
+import projectsController from "./rest/projectsController";
 
 dotenv.config();
 const debugMode = process.env.DEBUG ? process.env.DEBUG === 'true' : false
@@ -16,7 +17,6 @@ DBconnection(debugMode);
 const app: Express = express();
 const server = createServer(app);
 const io = new Server(server, socketConfig);
-
 app.use(cors());
 const port = process.env.PORT;
 app.use(LOGGER);
@@ -29,8 +29,8 @@ app.get("/api/chat", (req, res) => {
     res.send("Websocket connection...");
 });
 
+app.use("/api/projects", projectsController);
 chatHandler(io);
-
 
 server.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
